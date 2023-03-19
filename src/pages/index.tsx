@@ -6,6 +6,12 @@ import { Inter } from 'next/font/google';
 import fetchVagas from '@/utils/fetchVagas';
 import vaga from '@/types/vaga';
 
+import Header from '@/components/organisms/Header';
+import Hero from '@/components/organisms/Hero';
+import Footer from '@/components/organisms/Footer';
+import Categories from '@/components/molecules/Categories';
+import Vagas from '@/components/organisms/Vagas';
+
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
@@ -46,58 +52,11 @@ export default function Home() {
               />
               <link rel="icon" href="/favicon.ico" />
           </Head>
-          <main>
-              <h1>Proletário</h1>
-
-              <p>Procurando vagas de emprego?</p>
-              <p>Procurando profissionais para sua empresa?</p>
-
-              <p>Proletário é a plataforma da classe trabalhadora.</p>
-
-              <div>
-                  <h2>Vagas</h2>
-                  <ul>
-                      {vagas.map((vaga) => (
-                          <div key={vaga.id}>
-                              <li onClick={() => handleClick(vaga.id)}>
-                                  <h3>{vaga.title}</h3>
-                                  {vaga.labels.map((label) => (
-                                      <span
-                                          style={{
-                                              borderColor: `#${label.color}`,
-                                              borderWidth: "1px",
-                                              borderStyle: "solid",
-                                              borderRadius: "5px",
-                                              padding: "5px",
-                                              margin: "5px",
-                                          }}
-                                          key={label.id}
-                                      >
-                                          {label.name}
-                                      </span>
-                                  ))}
-                              </li>
-                              <div className={`${show && isSelected === vaga.id ? 'block' : 'hidden'} bg-white w-screen min-h-screen z-10`}>
-                                <h2>{vaga.title}</h2>
-                                <p>{vaga.body}</p>
-                              </div>
-                          </div>
-                      ))}
-                  </ul>
-              </div>
-          </main>
-
-          <style jsx>{`
-              main {
-                  display: flex;
-                  flex-direction: column;
-                  align-items: center;
-                  justify-content: center;
-                  padding: 5rem 0;
-                  flex: 1;
-                  text-align: center;
-              }
-          `}</style>
+        <Header />
+        <Hero />
+        <Categories />
+        <Vagas />
+        <Footer />
       </>
   );
 }

@@ -19,10 +19,10 @@ export const repositories = [
     "CangaceirosDevels/vagas_de_emprego",
 ];
 
-export default async function fetchVagas() {
+export default async function fetchVagas(label?: String[] | String) {
     const octokit = new Octokit({
-        auth: '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',
-    });
+			auth: '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',
+		});
 
     const issues = await Promise.all(
         repositories.map(async (repository) => {
@@ -30,6 +30,7 @@ export default async function fetchVagas() {
             const { data } = await octokit.request(`GET /repos/${owner}/${repo}/issues`, {
                 owner: owner,
                 repo: repo,
+								labels: label,
             });
             return data;
         })
