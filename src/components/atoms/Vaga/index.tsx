@@ -1,23 +1,53 @@
-import React from "react";
+import React,{useState} from "react";
+import ReactMarkdown from "react-markdown";
 
-function Vaga() {
+interface VagaProps {
+	title: string;
+	body: string;
+	date: Date;
+	labels: {
+		name: string;
+		color: string;
+	}[];
+}
+
+function Vaga({ title, body, date, labels }: VagaProps) {
+	const [isClicked, setIsClicked] = useState(false);
 	return (
-		<div className="w-full h-24 py-4 flex border border-gray-300 rounded-lg">
-			<div className="w-32 lg:w-36 border-r border-gray-300 flex justify-center items-center">
-				<p>1 hora atrás</p>
-			</div>
-			<div className="flex flex-col lg:flex-row lg:justify-between">
-				<div className="lg:w-1/2 pl-6 lg:border-r border-gray-300 flex items-center">
-					<h3>Título</h3>
+		<article
+			className="w-full max-w-xl mx-auto p-4 flex flex-col bg-white shadow-[rgba(66,_66,_66,_0.2)_0px_2px_1px_-1px,rgba(66,_66,_66,_0.14)_0px_1px_1px_0px,_rgba(66,_66,_66,_0.12)_0px_1px_3px_0px] rounded-xl cursor-pointer -tracking-tighter space-y-3"
+			onClick={() => setIsClicked(!isClicked)}
+		>
+			<header>
+				<h2>{title}</h2>
+				Publicada em <time>{date.toString()}</time>
+			</header>
+			<ul className="flex flex-wrap space-x-2">
+				{labels.map((label) => (
+					<li
+						key={label.name}
+						className={`text-xs font-semibold tracking-widest uppercase text-[#666666] px-2 py-1`}
+						style={{
+							borderColor: `#${label.color}`,
+							borderWidth: "1px",
+							borderStyle: "solid",
+							borderRadius: "5px",
+							padding: "5px",
+							margin: "5px",
+						}}
+					>
+						{label.name}
+					</li>
+				))}
+			</ul>
+			{isClicked && (
+				<div>
+					<div className="">
+						<ReactMarkdown>{body}</ReactMarkdown>
+					</div>
 				</div>
-				<ul className="flex items-center flex-wrap pl-6 space-x-4">
-					<li>Front-end</li>
-					<li>Back-end</li>
-					<li>Full-stack</li>
-					<li>Mobile</li>
-				</ul>
-			</div>
-		</div>
+			)}
+		</article>
 	);
 }
 

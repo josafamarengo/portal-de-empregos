@@ -21,7 +21,7 @@ export const repositories = [
 
 export default async function fetchVagas(label?: String[] | String) {
     const octokit = new Octokit({
-			auth: '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',
+			auth: "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",
 		});
 
     const issues = await Promise.all(
@@ -30,6 +30,7 @@ export default async function fetchVagas(label?: String[] | String) {
             const { data } = await octokit.request(`GET /repos/${owner}/${repo}/issues`, {
                 owner: owner,
                 repo: repo,
+								state: "open",
 								labels: label,
             });
             return data;
@@ -37,4 +38,5 @@ export default async function fetchVagas(label?: String[] | String) {
     );
 
     return issues.flat();
+
 }

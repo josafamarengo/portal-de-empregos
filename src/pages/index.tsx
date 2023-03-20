@@ -6,7 +6,6 @@ import { Inter } from 'next/font/google';
 import fetchVagas from '@/utils/fetchVagas';
 import vaga from '@/types/vaga';
 
-import Header from '@/components/organisms/Header';
 import Hero from '@/components/organisms/Hero';
 import Footer from '@/components/organisms/Footer';
 import Categories from '@/components/molecules/Categories';
@@ -16,11 +15,14 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
     const [vagas, setVagas] = useState<vaga[]>([]);
+		const [recent, setRecent] = useState<vaga[]>([]);
     const [show, setShow] = useState(false);
     const [isSelected, setIsSelected] = useState(0);
 
     useEffect(() => {
         fetchVagas().then((vagas) => setVagas(vagas));
+				const four = vagas.slice(0, 4);
+				setRecent(four);
     }, []);
 
     const vagasOrdenadas = vagas.sort((a, b) => {
@@ -52,10 +54,9 @@ export default function Home() {
               />
               <link rel="icon" href="/favicon.ico" />
           </Head>
-        <Header />
         <Hero />
         <Categories />
-        <Vagas />
+        <Vagas vagas={recent}/>
         <Footer />
       </>
   );

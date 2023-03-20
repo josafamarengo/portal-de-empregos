@@ -1,9 +1,37 @@
-import React from 'react'
+import React from 'react';
+import style from './Button.module.css';
 
-function Button() {
+interface ButtonProps {
+	type: 'primary' | 'secondary';
+	size: 'small' | 'medium' | 'large';
+	children: React.ReactNode;
+}
+
+function Button({ type, size, children }: ButtonProps) {
+
+	let buttonSize = ''
+
+	switch (size) {
+		case 'small':
+			buttonSize = style.small
+			break;
+		case 'medium':
+			buttonSize = style.medium
+			break;
+		case 'large':
+			buttonSize = style.large
+			break;
+	}
+
 	return (
-		<button className='w-52 h-14 mt-8 border-2 border-green-500 text-green-500 font-semibold hover:bg-green-500 hover:text-white transition-colors ease-in-out duration-500'>Button</button>
-	)
+		<button
+			className={`
+				${style.button}
+				${buttonSize}
+				${type == 'primary' ? style.primary : style.secondary}
+		`}>{children}
+		</button>
+	);
 }
 
 export default Button

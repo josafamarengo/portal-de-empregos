@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react'
 
 function index() {
@@ -8,8 +9,10 @@ function index() {
          bg-gradient-to-r from-[#446391] to-[#537dbb]
         "
       >
-          <div className="max-w-6xl h-full mx-auto flex items-center justify-between">
+          <div className="max-w-6xl h-full mx-auto flex items-center justify-center xl:justify-between">
+						<Link href="/">
               <h1 className="text-4xl">Header</h1>
+						</Link>
           </div>
       </header>
   );

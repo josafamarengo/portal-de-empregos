@@ -5,3 +5,11 @@
 html {
 	overflow-x: hidden;
 }
+
+h2 {
+	@apply font-semibold text-xl tracking-widest;
+}
+
+h3 {
+	@apply font-semibold text-lg tracking-widest;
+}

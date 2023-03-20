@@ -1,22 +1,27 @@
 import React,{useState, useEffect} from 'react';
 import { useRouter } from 'next/router';
 import fetchVagas from '@/utils/fetchVagas';
-
-import * as VagaComponent from '@/components/atoms/Vaga';
 import Vaga from '@/types/vaga';
+import * as VagaComponent from '@/components/atoms/Vaga';
 
-function VagasFiltradas() {
-	const[vagas, setVagas] = useState([] as Vaga[]);
+function Pesquisa() {
+	const [vagas, setVagas] = useState([] as Vaga[]);
 	const router = useRouter();
 	const { slug } = router.query;
 
 	useEffect(() => {
-		fetchVagas(slug).then((vagas) => setVagas(vagas));
-	}, [slug])
+		fetchVagas().then((vagas) => setVagas(vagas));
+	}, [])
+
+	const filteredVagas = vagas.filter((vaga) => {
+		return vaga.title
+			.toLowerCase()
+			.includes((slug as string).replaceAll("-", " "));
+	});
 
 	return (
 		<div className="w-full space-y-2 px-2 lg:px-0">
-			{vagas.map((vaga) => (
+			{filteredVagas.map((vaga) => (
 				<VagaComponent.default
 					key={vaga.title}
 					title={vaga.title}
@@ -26,7 +31,7 @@ function VagasFiltradas() {
 				/>
 			))}
 		</div>
-	);
+	)
 }
 
-export default VagasFiltradas
+export default Pesquisa

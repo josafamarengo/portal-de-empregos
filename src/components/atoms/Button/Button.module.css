@@ -1,0 +1,35 @@
+.button {
+	font-weight: 600;
+	transition: all 0.5s ease-in-out;
+	border-radius: .75rem;
+}
+.button:hover {
+	background-color: #059679;
+	color: #fff;
+	border-color: #059679;
+}
+
+.primary {
+	background-color: #00b894;
+	color: #fff;
+}
+
+.secondary {
+	color: #00b894;
+	border:#00b894 3px solid;
+}
+
+.small {
+	font-size: 1.2rem;
+	padding: .3rem .75rem;
+}
+
+.medium {
+	font-size: 1.4rem;
+	padding: .75rem 1rem;
+}
+
+.large {
+	font-size: 1.6rem;
+	padding: 1rem 1.25rem;
+}
